@@ -49,6 +49,16 @@ This project uses mock data to represent various aspects of the fictional compan
 - **Format**: Semi-structured (JSON)
 - **Use**: Predictive maintenance, performance optimization, vehicle health monitoring.
 
+### PDF Documents
+
+Apart from the structured and semi-structured datasets, this project also incorporates a range of PDF documents. These include:
+
+1. **Technical Specifications Sheets**: Detailed specs for each EcoRide EV model.
+2. **Vehicle Comparison Brochure**: Comparative analyses of different EcoRide EV models, highlighting their features and benefits.
+3. **Maintenance Tips Sheets**: Guides and tips for maintaining the health and performance of EcoRide EVs.
+
+These PDFs serve as a rich source of information for a Large Language Model (LLM) application, enabling it to provide detailed responses based on extensive product knowledge.
+
 Each dataset is synthetically generated to simulate real-world scenarios, showcasing the capabilities of a data lakehouse in handling diverse data types and formats.
 
 ## Installation
@@ -66,22 +76,37 @@ Before you get started with this project, make sure you have the following insta
 ### Installation Steps
 1. **Clone the Repository**:
    ```
-   git clone https://github.com/ThaliaBarrera/ecoride-data-lakehouse.git
+   git clone https://github.com/ThaliaBarrera/lakehouse-capstone.git
    ```
 
 2. **Navigate to the Project Directory**:
    ```
-   cd ecoride-data-lakehouse
+   cd lakehouse-capstone
    ```
 
 3. **Build and Run Docker Containers**:
    - Ensure Docker is running on your machine.
-   - Execute the following command to build and run the necessary services (like MinIO, Iceberg, Dremio, Nessie):
+   - Execute the following command to build and run the necessary services (MinIO, Dremio and Nessie):
      ```
      docker-compose up -d
      ```
+4. **Access MinIO**:
+    - Go to http://localhost:9000 in your browser and login to the MinIO UI using the credentials defined in the `docker-compose.yml` file.
+    - Create a new access key in the `Acesss Keys` section.
+        - Update the `.env.example` file with your `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`.
+    - Create 3 buckets necessary for this project: `bronze-data`, `silver-data`, `gold-data`.
 
-4. **Install Python Dependencies**:
+5. **Access Dremio and Connect to MinIO**:
+    - Go to http://localhost:9047 in your browser and create a new account if you don't have one. Then, log into your account.
+    - Click on "Add Source" at the bottom left, and select "Amazon S3" under "Object Storage".
+    - Fill in the details like the "Name", "AWS Access Key", "AWS Access Secret" and under Buckets, add `bronze-data`.
+    - Click on the "Advanced Options" tab and check "Enable compatibility mode".
+    - Add 2 new "Connection Properties":
+        - `fs.s3a.endpoint`: `minio:9000`
+        - `fs.s3a.path.style.access`: `true`
+    - Add `bronze-data` to the "Allowlisted buckets" list and hit "Save".
+
+6. **Install Python Dependencies**:
    - It's recommended to create a virtual environment:
      ```
      python -m venv venv
@@ -89,17 +114,18 @@ Before you get started with this project, make sure you have the following insta
    - Activate the virtual environment:
      - On Windows: `.\venv\Scripts\activate`
      - On Linux/Mac: `source venv/bin/activate`
+     
    - Install required packages:
      ```
      pip install -r requirements.txt
      ```
 
 5. **Setting Up Environment Variables**:
-   - Copy the `.env.example` file to create a `.env` file:
+   - Copy the `.env.example` file to create a `.env` file (or just rename it):
      ```
      cp .env.example .env
      ```
-   - Fill in the necessary environment variables in `.env`.
+   - Make sure all the environment variables are correct.
 
 ## Project Usage
 
@@ -108,11 +134,10 @@ Before you get started with this project, make sure you have the following insta
      ```
      python -m ingestion.bronze.ecoride_ingest
      python -m ingestion.bronze.chargenet_ingest
+     python -m ingestion.bronze.vehicle_health_ingest
      ```
 
 2. **Data Exploration and Analysis**:
-   - Access Dremio UI at `http://localhost:<port>` to explore and analyze the data.
-   - Use Jupyter Notebooks for data analysis.
 
 ## Contributing
 
