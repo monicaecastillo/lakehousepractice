@@ -9,12 +9,13 @@ class DataIngestor:
         # Generate SQL statement for table creation
         schema = df.schema
         schema_sql = ', '.join([f"{field.name} {field.dataType.simpleString()}" for field in schema.fields])
-        create_table_sql = f"CREATE OR REPLACE TABLE nessie.{business_entity}_{table_name} ({schema_sql}) USING iceberg"
+        create_table_sql = f"CREATE OR REPLACE TABLE nessie.{business_entity}.{table_name} ({schema_sql}) USING iceberg"
 
         # Execute the SQL statement
         try:
+            self.spark.sql(f"CREATE NAMESPACE IF NOT EXISTS nessie.{business_entity};")
             self.spark.sql(create_table_sql)
-            logging.info(f"Iceberg table nessie.{business_entity}_{table_name} created/replaced successfully.")
+            logging.info(f"Iceberg table nessie.{business_entity}.{table_name} created/replaced successfully.")
         except Exception as e:
             logging.error(f"Error creating/replacing Iceberg table: {e}")
             raise e
@@ -30,7 +31,7 @@ class DataIngestor:
                 raise ValueError(f"Unsupported file type '{file_type}'. Supported types: csv, json")
 
             # Construct the full table path
-            full_table_path = f"nessie.{business_entity}_{table_name}"
+            full_table_path = f"nessie.{business_entity}.{table_name}"
 
             # Ensure the Iceberg table exists
             self.create_or_replace_iceberg_table(df, business_entity, table_name)
