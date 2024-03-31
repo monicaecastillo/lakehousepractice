@@ -96,15 +96,18 @@ Before you get started with this project, make sure you have the following insta
         - Update the `.env.example` file with your `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`.
     - Create 3 buckets necessary for this project: `bronze-data`, `silver-data`, `gold-data`.
 
-5. **Access Dremio and Connect to MinIO**:
+5. **Access Dremio and Connect to MinIO and Nessie**:
     - Go to http://localhost:9047 in your browser and create a new account if you don't have one. Then, log into your account.
-    - Click on "Add Source" at the bottom left, and select "Amazon S3" under "Object Storage".
-    - Fill in the details like the "Name", "AWS Access Key", "AWS Access Secret" and under Buckets, add `bronze-data`.
-    - Click on the "Advanced Options" tab and check "Enable compatibility mode".
-    - Add 2 new "Connection Properties":
+    - Click on "Add Source" at the bottom left, and select "Nessie" under "Catalogs".
+    - In the "General" tab, fill in the details like "Name", "endpoint" (you can find it in the `.env.example` file) and select "None" as the authetication type.
+    - Then, go to the "Storage" tab and fill in the details:
+      - The "AWS root path" should point to `bronze-data`.
+      - Select AWS Access Key as the auth method and fill in with your "AWS Access Key", "AWS Access Secret".
+      - Add 3 new "Connection Properties":
         - `fs.s3a.endpoint`: `minio:9000`
         - `fs.s3a.path.style.access`: `true`
-    - Add `bronze-data` to the "Allowlisted buckets" list and hit "Save".
+        - `dremio.s3.compat`: `true`
+    - Click "Save".
 
 6. **Install Python Dependencies**:
    - It's recommended to create a virtual environment:

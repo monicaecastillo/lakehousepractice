@@ -11,10 +11,8 @@ if __name__ == "__main__":
 
     # Ingest chargenet_stations.json to the Bronze layer
     stations_file = path_manager.get_local_file_path("chargenet_stations", "json")
-    stations_s3_path = path_manager.get_bronze_s3_path("chargenet", "stations")
-    ingestor.ingest_file_to_bronze(stations_file, stations_s3_path, "json")
+    ingestor.ingest_file_to_bronze(stations_file, "chargenet", "stations", "json")
 
     # Ingest chargenet_charging_sessions.json to the Bronze layer
     sessions_file = path_manager.get_local_file_path("chargenet_charging_sessions", "json")
-    sessions_s3_path = path_manager.get_bronze_s3_path("chargenet", "charging_sessions")
-    ingestor.ingest_file_to_bronze(sessions_file, sessions_s3_path, "json")
+    ingestor.ingest_file_to_bronze(sessions_file, "chargenet", "charging_sessions", "json")

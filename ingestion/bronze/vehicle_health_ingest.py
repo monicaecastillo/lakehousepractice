@@ -11,5 +11,4 @@ if __name__ == "__main__":
 
     # Ingest vehicle_health_data.json to the Bronze layer
     vehicle_health_file = path_manager.get_local_file_path("vehicle_health_data", "json")
-    vehicle_health_s3_path = path_manager.get_bronze_s3_path("vehicle_health", "logs")
-    ingestor.ingest_file_to_bronze(vehicle_health_file, vehicle_health_s3_path, "json")
+    ingestor.ingest_file_to_bronze(vehicle_health_file, "vehicle_health", "logs", "json")

@@ -146,3 +146,58 @@ logs/
 
 # Others
 .DS_Store
+
+# Spark and Hive logs
+logs/
+metastore_db/
+spark-warehouse/
+
+# Nessie related files
+.nessie/
+
+# Compiled Python files
+*.pyc
+__pycache__/
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# Dremio related files
+.dremio/
+
+# Environment files
+.env
+*.env.local
+
+# Virtual environment
+venv/
+.env/
+
+# DBT files
+dbt_modules/
+/target/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE-specific files (e.g., for VSCode or PyCharm)
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Python build directories
+build/
+dist/
+*.egg-info/
+
+# Generated files
+*.log
+*.csv
+*.json
+
+# Temp files
+*.tmp
+*.temp
+
