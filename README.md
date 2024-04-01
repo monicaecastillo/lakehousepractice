@@ -94,14 +94,14 @@ Before you get started with this project, make sure you have the following insta
     - Go to http://localhost:9000 in your browser and login to the MinIO UI using the credentials defined in the `docker-compose.yml` file.
     - Create a new access key in the `Acesss Keys` section.
         - Update the `.env.example` file with your `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`.
-    - Create 3 buckets necessary for this project: `bronze-data`, `silver-data`, `gold-data`.
+    - Create a bucket necessary for this project: `lakehouse`
 
 5. **Access Dremio and Connect to MinIO and Nessie**:
     - Go to http://localhost:9047 in your browser and create a new account if you don't have one. Then, log into your account.
     - Click on "Add Source" at the bottom left, and select "Nessie" under "Catalogs".
-    - In the "General" tab, fill in the details like "Name", "endpoint" (you can find it in the `.env.example` file) and select "None" as the authetication type.
+    - In the "General" tab, fill in the details like "Name", "Endpoint" (`http://nessie:19120/api/v2`) and select "None" as the authetication type.
     - Then, go to the "Storage" tab and fill in the details:
-      - The "AWS root path" should point to `bronze-data`.
+      - The "AWS root path" should point to `lakehouse`.
       - Select AWS Access Key as the auth method and fill in with your "AWS Access Key", "AWS Access Secret".
       - Add 3 new "Connection Properties":
         - `fs.s3a.endpoint`: `minio:9000`
