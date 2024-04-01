@@ -7,7 +7,7 @@ if __name__ == "__main__":
     config = ConfigLoader()
     spark = create_spark_session()
     ingestor = DataIngestor(spark)
-    path_manager = FilePathManager(config.base_data_dir, config.bronze_s3_path)
+    path_manager = FilePathManager(config.base_data_dir, config.lakehouse_s3_path)
 
     # Ingest ecoride_customers.csv to the Bronze layer
     customer_file = path_manager.get_local_file_path("ecoride_customers", "csv")

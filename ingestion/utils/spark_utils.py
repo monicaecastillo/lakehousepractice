@@ -16,7 +16,7 @@ def create_spark_session():
         .config('spark.sql.catalog.nessie.authentication.type', 'NONE') \
         .config('spark.sql.catalog.nessie.catalog-impl', 'org.apache.iceberg.nessie.NessieCatalog') \
         .config('spark.sql.catalog.nessie.s3.endpoint', os.environ.get("AWS_S3_ENDPOINT")) \
-        .config('spark.sql.catalog.nessie.warehouse', os.environ.get("BRONZE_S3_PATH")) \
+        .config('spark.sql.catalog.nessie.warehouse', os.environ.get("LAKEHOUSE_S3_PATH")) \
         .config('spark.sql.catalog.nessie.io-impl', 'org.apache.iceberg.aws.s3.S3FileIO') \
         .config('spark.hadoop.fs.s3a.access.key', os.environ.get("AWS_ACCESS_KEY_ID")) \
         .config('spark.hadoop.fs.s3a.secret.key', os.environ.get("AWS_SECRET_ACCESS_KEY")) \

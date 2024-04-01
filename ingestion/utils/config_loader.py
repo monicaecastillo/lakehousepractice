@@ -12,7 +12,7 @@ class ConfigLoader:
         self.aws_s3_endpoint = os.environ.get("AWS_S3_ENDPOINT")
         self.aws_access_key_id = os.environ.get("AWS_ACCESS_KEY_ID")
         self.aws_secret_access_key = os.environ.get("AWS_SECRET_ACCESS_KEY")
-        self.bronze_s3_path = os.environ.get("BRONZE_S3_PATH")
+        self.lakehouse_s3_path = os.environ.get("LAKEHOUSE_S3_PATH")
 
         # Define the paths to local files
         self.script_dir = os.path.dirname(os.path.abspath(__file__))
