@@ -139,6 +139,26 @@ Before you get started with this project, make sure you have the following insta
      python -m ingestion.bronze.chargenet_ingest
      python -m ingestion.bronze.vehicle_health_ingest
      ```
+2. **Data Transformation**:
+  The data transformations are handed by `dbt`. The `dbt` project is in the `lakehouse` folder. Before running the transformations, a couple of assets need to be created in Dremio.
+
+  - Go to the Dremio UI, and click on the Nessie `catalog` in Sources.
+  - Create a new folder named `silver` inside the catalog. This will create a namespace with the same name in Nessie. This folder will hold the tables corresponding to the silver layer.
+  - In the Spaces section, create a new space named `lakehouse` and inside, create a folder named `gold`. These will hold the views created by `dbt`.
+  - In the terminal, move to the `lakehouse` directory:
+    ```
+    cd lakehouse
+    ```
+  - Create 2 new environment variables, `DREMIO_USER` and `DREMIO_PASSWORD` and assign the values of your user and password. These variables are used by the `profiles.yml` file to allow `dbt` to connect to Dremio.
+  - Verify that `dbt` can connect to Dremio and everything is set up correctly:
+    ```
+    dbt debug
+    ```
+  - Run the models:
+    ```
+    dbt run
+    ```
+  The silver models should be materialized as tables inside the `catalog`, and the gold models as views in the `lakehouse/gold` space.
 
 2. **Data Exploration and Analysis**:
 
