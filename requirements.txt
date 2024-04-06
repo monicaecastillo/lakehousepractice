@@ -1,2 +1,3 @@
 pyspark==3.3.0
 python-dotenv
+dbt-dremio==1.5.0

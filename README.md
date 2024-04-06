@@ -94,7 +94,7 @@ Before you get started with this project, make sure you have the following insta
     - Go to http://localhost:9000 in your browser and login to the MinIO UI using the credentials defined in the `docker-compose.yml` file.
     - Create a new access key in the `Acesss Keys` section.
         - Update the `.env.example` file with your `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`.
-    - Create a bucket necessary for this project: `lakehouse`
+    - Create a bucket named `lakehouse`
 
 5. **Access Dremio and Connect to MinIO and Nessie**:
     - Go to http://localhost:9047 in your browser and create a new account if you don't have one. Then, log into your account.

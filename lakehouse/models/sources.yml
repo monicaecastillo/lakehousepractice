@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: ecoride_bronze
+    database: catalog
+    schema: bronze.ecoride
+
+    tables:
+      - name: customers
+      - name: sales
+      - name: vehicles
