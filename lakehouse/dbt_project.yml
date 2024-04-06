@@ -37,6 +37,8 @@ models:
   lakehouse:
     # Config indicated by + and applies to all files under models/example/
     silver:
+      tags: ["silver"]
       materialized: table
     gold:
+      tags: ["gold"]
       materialized: view

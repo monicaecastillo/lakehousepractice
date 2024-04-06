@@ -156,7 +156,8 @@ Before you get started with this project, make sure you have the following insta
     ```
   - Run the models:
     ```
-    dbt run
+    dbt run --target silver --models tag:silver
+    dbt run --target gold --models tag:gold
     ```
   The silver models should be materialized as tables inside the `catalog`, and the gold models as views in the `lakehouse/gold` space.
 
