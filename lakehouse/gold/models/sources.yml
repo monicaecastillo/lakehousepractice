@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+  - name: silver
+    database: catalog
+    schema: silver
+    tables:
+      - name: customers
+      - name: sales
+      - name: vehicles
+      - name: product_reviews
+      - name: charging_sessions
+      - name: stations
+      - name: vehicle_health_logs
