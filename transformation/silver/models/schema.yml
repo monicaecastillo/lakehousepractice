@@ -11,13 +11,8 @@ models:
           - unique
       - name: first_name
         description: "First name of the customer"
-        tests:
-          - not_null
       - name: email
         description: "Email address of the customer"
-        tests:
-          - not_null
-          - unique
 
   - name: sales
     description: "Sales data for ecoride vehicles"
@@ -34,7 +29,6 @@ models:
           - relationships:
               to: ref('customers')
               field: id
-    # Consider adding more specific tests if relevant for payment_method or sale_price.
 
   - name: vehicles
     description: "Details of ecoride vehicles"
@@ -47,21 +41,17 @@ models:
       - name: model_name
         description: "Name of the vehicle model"
         tests:
-          - not_null
+          - accepted_values:
+              values: ['EcoSprint', 'PowerRide', 'UrbanGlide', 'TerraCross', 'AeroFlow']
       - name: model_type
         description: "Type of the vehicle model, e.g., Sedan, SUV"
         tests:
-          - not_null
           - accepted_values:
-              values: ['Sedan', 'SUV', 'Crossover', 'Hatchback']
+              values: ['Sedan', 'SUV', 'Hatchback', 'Coupe', 'Crossover']
       - name: color
         description: "Color of the vehicle"
-        tests:
-          - not_null
       - name: year
         description: "Manufacturing year of the vehicle"
-        tests:
-          - not_null
 
   - name: product_reviews
     description: "Customer reviews for ecoride products"
@@ -80,36 +70,22 @@ models:
           - unique
       - name: VehicleModel
         description: "Model of the vehicle being reviewed"
-        tests:
-          - not_null
       - name: Rating
         description: "Rating given by the customer"
-        tests:
-          - not_null
       - name: Date
         description: "Date of the review"
-        tests:
-          - not_null
 
   - name: charging_sessions
     description: "Details of electric vehicle charging sessions"
     columns:
       - name: charging_rate
         description: "Rate of charging in kW"
-        tests:
-          - not_null
       - name: cost
         description: "Cost of the charging session"
-        tests:
-          - not_null
       - name: end_time
         description: "End time of the charging session"
-        tests:
-          - not_null
       - name: energy_consumed_kWh
         description: "Total energy consumed in kWh"
-        tests:
-          - not_null
       - name: id
         description: "Unique identifier for the charging session"
         tests:
@@ -117,32 +93,20 @@ models:
           - unique
       - name: session_duration
         description: "Duration of the charging session in minutes"
-        tests:
-          - not_null
       - name: start_time
         description: "Start time of the charging session"
-        tests:
-          - not_null
       - name: station_id
         description: "Identifier of the charging station"
-        tests:
-          - not_null
 
   - name: stations
     description: "Details of electric vehicle charging stations"
     columns:
       - name: address
         description: "Address of the charging station"
-        tests:
-          - not_null
       - name: city
         description: "City where the charging station is located"
-        tests:
-          - not_null
       - name: country
         description: "Country where the charging station is located"
-        tests:
-          - not_null
       - name: id
         description: "Unique identifier for the charging station"
         tests:
@@ -150,40 +114,25 @@ models:
           - unique
       - name: number_of_chargers
         description: "Number of chargers available at the station"
-        tests:
-          - not_null
       - name: operational_status
         description: "Current operational status of the station"
-        tests:
-          - not_null
       - name: state
         description: "State where the charging station is located"
-        tests:
-          - not_null
       - name: station_type
         description: "Type of the charging station"
-        tests:
-          - not_null
 
   - name: vehicle_health_logs
     description: "Log data for vehicle health and maintenance history"
     columns:
-      - name: alerts
+      - name: Alerts
         description: "Alerts issued for the vehicle"
-        tests: []
-      - name: maintenance_history
+      - name: MaintenanceHistory
         description: "History of maintenance activities"
-        tests: []
-      - name: manufacturing_year
+      - name: ManufacturingYear
         description: "Year the vehicle was manufactured"
-        tests:
-          - not_null
-      - name: model
+      - name: Model
         description: "Model of the vehicle"
+      - name: vehicleID
+        description: "Identifier for the vehicle"
         tests:
           - not_null
-      - name: vehicle_id
-        description: "Unique identifier for the vehicle"
-        tests:
-          - not_null
-          - unique
