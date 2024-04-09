@@ -162,6 +162,22 @@ Before you get started with this project, make sure you have the following insta
 
   The silver models should be materialized as tables inside the `catalog`, and the gold models as views in the `lakehouse/gold` space. You can change this behaviour in the `dbt_project.yml` files.
 
+3. **Execute full DAG**:
+  - Go to the orchestration folder:
+  ```
+  cd orchestration
+  ```
+
+  - Set up the following environament variable:
+  ```
+  export DAGSTER_DBT_PARSE_PROJECT_ON_LOAD=1
+  ```
+
+  - Launch Dagster:
+  ```
+  dagster dev
+  ```
+
 2. **Data Exploration and Analysis**:
 
 ## Contributing
