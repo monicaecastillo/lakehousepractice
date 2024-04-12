@@ -123,7 +123,7 @@ Before you get started with this project, make sure you have the following insta
      pip install -r requirements.txt
      ```
 
-5. **Setting Up Environment Variables**:
+7. **Setting Up Environment Variables**:
    - Copy the `.env.example` file to create a `.env` file (or just rename it):
      ```
      cp .env.example .env
@@ -132,28 +132,32 @@ Before you get started with this project, make sure you have the following insta
 
 ## Project Usage
 
-1. **Data Ingestion**:
+### 1. **Data Ingestion**:
    - Run the ingestion scripts to load the files in the `data` folder into the `bronze` layer of the data lakehouse:
      ```
      python -m ingestion.bronze.ecoride_ingest
      python -m ingestion.bronze.chargenet_ingest
      python -m ingestion.bronze.vehicle_health_ingest
      ```
-2. **Data Transformation**:
-  The data transformations are handed by `dbt`. The `dbt` projects are in the `transformation` folder. Inside the `transformation` folder you'll find two separate projects: `silver` and `gold`, one for each layer of the lakehouse. Before running the transformations, a couple of assets need to be created in Dremio.
+### 2. **Data Transformation**:
+  The data transformations are handled by dbt. The dbt projects are in the `transformation` folder. Inside the `transformation` folder you'll find two separate projects: `silver` and `gold`, one for each layer of the lakehouse. Before running the transformations, a couple of assets need to be created in Dremio.
 
   - Go to the Dremio UI, and click on the Nessie `catalog` in Sources.
   - Create a new folder named `silver` inside the catalog. This will create a namespace with the same name in Nessie. This folder will hold the tables corresponding to the silver layer.
-  - In the Spaces section, create a new space named `lakehouse` and inside, create a folder named `gold`. These will hold the views created by `dbt`.
+  - In the Spaces section, create a new space named `lakehouse` and inside, create a folder named `gold`. These will hold the views created by dbt.
   - Create 2 new environment variables, `DREMIO_USER` and `DREMIO_PASSWORD` and assign the values of your user and password. These variables are used by the `profiles.yml` files to allow `dbt` to connect to Dremio.
-  - In the terminal, move to the `transformation/silver` directory:
+  - In the terminal, move to the `transformation/silver` or `transformation/gold` directory:
     ```
     cd transformation/silver
     ```
-  - Verify that `dbt` can connect to Dremio and everything is set up correctly:
+  - Verify that dbt can connect to Dremio and everything is set up correctly:
     ```
     dbt debug
     ```
+  
+#### 2.1 **(Optional) Run dbt models**:
+  This step is optional, and you can execute it if you'd like to run some of the models, or some of the layers. If you want to execute the full DAG instead, skip to the next section. 
+
   - Run the models:
     ```
     dbt run
@@ -162,7 +166,9 @@ Before you get started with this project, make sure you have the following insta
 
   The silver models should be materialized as tables inside the `catalog`, and the gold models as views in the `lakehouse/gold` space. You can change this behaviour in the `dbt_project.yml` files.
 
-3. **Execute full DAG**:
+### 3. **Execute full DAG**:
+  The dbt projects are orchestrated by Dagster, and it takes care of the necessary dependencies. If you'd like to execute the whole DAG (silver and gold layers), follow these steps:
+
   - Go to the orchestration folder:
   ```
   cd orchestration
@@ -178,7 +184,12 @@ Before you get started with this project, make sure you have the following insta
   dagster dev
   ```
 
-2. **Data Exploration and Analysis**:
+  - Open the Dagster UI in your browser by going to http://127.0.0.1:3000/. You should see the full DAG. 
+  - Click on `Materialize all`, and your models should start materializing! 
+
+  ![Dagster Global Asset Lineage](img/Dagster_DAG.png)
+
+## Data Exploration and Analysis
 
 ## Contributing
 
