@@ -1,16 +1,13 @@
-import os
-
 from dagster import Definitions
-from dagster_dbt import DbtCliResource
-
-from .assets import silver_dbt_assets
-from .constants import dbt_project_dir
+from .assets import silver_dbt_assets, gold_dbt_assets
+from .constants import dbt_silver, dbt_gold
 from .schedules import schedules
 
 defs = Definitions(
-    assets=[silver_dbt_assets],
+    assets=[silver_dbt_assets, gold_dbt_assets],
     schedules=schedules,
     resources={
-        "dbt": DbtCliResource(project_dir=os.fspath(dbt_project_dir)),
+        "dbt_silver": dbt_silver,
+        "dbt_gold": dbt_gold,
     },
 )
