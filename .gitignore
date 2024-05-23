@@ -201,3 +201,5 @@ dist/
 *.tmp
 *.temp
 
+# Superset
+superset.db
