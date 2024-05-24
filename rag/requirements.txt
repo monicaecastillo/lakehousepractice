@@ -1,0 +1,7 @@
+langchain
+langchain-community
+unstructured
+"unstructured[pdf]"
+chromadb
+boto3
+pypdf
