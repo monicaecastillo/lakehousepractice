@@ -1,5 +1,5 @@
 # Use the base image from VS Code's devcontainer images
-FROM mcr.microsoft.com/vscode/devcontainers/base:ubuntu-20.04
+FROM mcr.microsoft.com/devcontainers/universal:linux
 
 # Install Java 8
 RUN apt-get update && \
