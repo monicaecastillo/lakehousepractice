@@ -1,0 +1,28 @@
+// For format details, see https://aka.ms/devcontainer.json.
+{
+  "name": "Java 8 Dev Container",
+  "build": {
+    "context": "..",
+    "dockerfile": "Dockerfile"
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/java:1": {
+      "version": "8"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "ms-python.python",
+        "ms-azuretools.vscode-docker",
+        "tomoki1207.pdf",
+        "ms-toolsai.jupyter"
+      ]
+    }
+  },
+  "postCreateCommand": "pip install -r requirements.txt && java -version",
+  "remoteUser": "vscode"
+}
+
+
