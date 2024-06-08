@@ -1,9 +1,6 @@
 from pyspark.sql import SparkSession
 import logging
 
-from pyspark.sql import SparkSession
-import logging
-
 class DataIngestor:
     def __init__(self, spark: SparkSession):
         self.spark = spark
