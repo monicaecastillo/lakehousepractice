@@ -5,3 +5,4 @@ dagster
 dagster-cloud
 dagster-dbt
 dagster-webserver
+boto3
