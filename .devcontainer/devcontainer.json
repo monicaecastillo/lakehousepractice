@@ -11,7 +11,8 @@
       "extensions": [
         "GitHub.github-vscode-theme",
         "ms-python.python",
-        "ms-azuretools.vscode-docker"
+        "ms-azuretools.vscode-docker",
+        "ms-toolsai.jupyter"
       ]
     }
   },
