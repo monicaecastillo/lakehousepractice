@@ -11,6 +11,11 @@ from langchain_community.embeddings.ollama import OllamaEmbeddings
 from langchain.prompts import ChatPromptTemplate
 from langchain_community.llms.ollama import Ollama
 
+# These three lines swap the stdlib sqlite3 lib with the pysqlite3 
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+
 CHROMA_PATH = "chroma"
 PROMPT_TEMPLATE = """
 Answer the question based only on the following context:
