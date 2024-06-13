@@ -20,7 +20,7 @@ services:
       MINIO_ROOT_PASSWORD: minioadmin
     container_name: minio
     command: server /data --console-address ":9001"
-  
+
   nessie:
     image: projectnessie/nessie
     container_name: nessie
@@ -40,6 +40,7 @@ services:
       - ./superset:/app/superset_home
       - ./superset-init.sh:/app/superset-init.sh
     entrypoint: /app/superset-init.sh
+    user: root
 
   jupyterlab:
     image: jupyter/datascience-notebook:latest
@@ -56,4 +57,4 @@ services:
 networks:
   default:
     name: lakehousenet
-    driver: bridge 
+    driver: bridge
